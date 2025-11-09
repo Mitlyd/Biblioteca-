@@ -65,4 +65,21 @@ public class Biblioteca {
     public void listarUsuarios() {
         usuarios.values().forEach(System.out::println);
     }
+
+    // 🔹 Nuevo método agregado (opción 6 del menú)
+    public void consultarPrestamosDeUsuario(int idUsuario) {
+        Optional<Usuario> usuarioOpt = Optional.ofNullable(usuarios.get(idUsuario));
+        if (usuarioOpt.isEmpty()) {
+            System.out.println("⚠️ Usuario no encontrado.");
+            return;
+        }
+
+        Usuario usuario = usuarioOpt.get();
+        if (usuario.getPrestamos().isEmpty()) {
+            System.out.println("📘 El usuario no tiene préstamos activos.");
+        } else {
+            System.out.println("📚 Préstamos de " + usuario.getNombre() + ":");
+            usuario.getPrestamos().forEach(System.out::println);
+        }
+    }
 }

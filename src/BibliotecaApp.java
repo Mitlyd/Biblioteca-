@@ -13,9 +13,10 @@ public class BibliotecaApp {
             System.out.println("3. Realizar préstamo");
             System.out.println("4. Devolver libro");
             System.out.println("5. Consultar libros disponibles");
-            System.out.println("6. Top 5 libros más prestados");
-            System.out.println("7. Usuarios con multas");
-            System.out.println("8. Salir");
+            System.out.println("6. Consultar préstamos de usuario");
+            System.out.println("7. Listar usuarios con multas");
+            System.out.println("8. Top 5 libros más prestados");
+            System.out.println("9. Salir");
             System.out.print("Seleccione opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -34,6 +35,7 @@ public class BibliotecaApp {
                         System.out.print("Ejemplares: ");
                         int ejemplares = sc.nextInt();
                         biblioteca.agregarLibro(new Libro(isbn, titulo, autor, anio, ejemplares));
+                        System.out.println("✅ Libro agregado correctamente.");
                     }
                     case 2 -> {
                         System.out.print("Nombre: ");
@@ -41,6 +43,7 @@ public class BibliotecaApp {
                         System.out.print("Email: ");
                         String email = sc.nextLine();
                         biblioteca.registrarUsuario(new Usuario(nombre, email));
+                        System.out.println("✅ Usuario registrado correctamente.");
                     }
                     case 3 -> {
                         System.out.print("ISBN del libro: ");
@@ -59,14 +62,25 @@ public class BibliotecaApp {
                         System.out.println("📘 Libro devuelto correctamente.");
                     }
                     case 5 -> biblioteca.listarLibrosDisponibles();
-                    case 6 -> biblioteca.obtenerTopLibrosPrestados().forEach(System.out::println);
-                    case 7 -> biblioteca.obtenerUsuariosConMultas().forEach(System.out::println);
-                    case 8 -> System.out.println("👋 Saliendo del sistema...");
-                    default -> System.out.println("Opción no válida.");
+                    case 6 -> {
+                        System.out.print("Ingrese el ID del usuario: ");
+                        int id = sc.nextInt();
+                        biblioteca.consultarPrestamosDeUsuario(id);
+                    }
+                    case 7 -> {
+                        System.out.println("=== Usuarios con multas pendientes ===");
+                        biblioteca.obtenerUsuariosConMultas().forEach(System.out::println);
+                    }
+                    case 8 -> {
+                        System.out.println("=== Top 5 libros más prestados ===");
+                        biblioteca.obtenerTopLibrosPrestados().forEach(System.out::println);
+                    }
+                    case 9 -> System.out.println("👋 Saliendo del sistema...");
+                    default -> System.out.println("⚠️ Opción no válida, intenta de nuevo.");
                 }
             } catch (Exception e) {
                 System.out.println("⚠️ Error: " + e.getMessage());
             }
-        } while (opcion != 8);
+        } while (opcion != 9);
     }
 }
