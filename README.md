@@ -5,7 +5,7 @@
 ### ✨ *Parcial Final – Programación Orientada a Objetos (Java)* ✨  
 
 💻 *Desarrollado por:*  
-**MICHEEL FERNANDA QUINTERO 💕**
+**MICHEEL 💕**
 
 </div>
 
